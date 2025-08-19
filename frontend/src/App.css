@@ -6,7 +6,8 @@
 .navbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 24px;
   padding: 12px 20px;
   background: #0f172a;
   color: #fff;
@@ -19,21 +20,28 @@
 
 .tabs {
   display: flex;
-  gap: 8px;
+  gap: 16px;
 }
 
 .tab {
   background: transparent;
-  border: 1px solid #334155;
-  color: #e2e8f0;
-  padding: 6px 12px;
-  border-radius: 6px;
+  border: none;
+  color: #cbd5e1;
+  padding: 0;
+  border-radius: 0;
   cursor: pointer;
+  font-size: 0.95rem;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.tab:hover {
+  color: #e2e8f0;
 }
 
 .tab.active {
-  background: #334155;
-  color: #fff;
+  color: #ffffff;
+  font-weight: 600;
 }
 
 /* Content */
