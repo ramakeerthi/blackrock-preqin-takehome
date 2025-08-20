@@ -1,0 +1,76 @@
+.filterBar {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #f8fafc;
+  margin-bottom: 16px;
+}
+
+.field {
+  min-width: 220px;
+}
+
+.label {
+  display: block;
+  font-size: 12px;
+  color: #64748b;
+  margin-bottom: 6px;
+}
+
+.select,
+.input {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  background: white;
+}
+
+.button {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  background: white;
+  cursor: pointer;
+}
+
+.button:disabled {
+  background: #e2e8f0;
+  cursor: not-allowed;
+}
+
+.buttonRight {
+  margin-left: auto;
+}
+
+.stats {
+  margin-bottom: 12px;
+  color: #475569;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.th,
+.td {
+  padding: 8px;
+  text-align: left;
+}
+
+.tdRight {
+  text-align: right;
+}
+
+.tr {
+  border-top: 1px solid #e2e8f0;
+}
+
+.rowClickable {
+  cursor: pointer;
+} 

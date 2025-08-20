@@ -1,3 +1,41 @@
+# BlackRock Preqin Takehome
+
+## Run with Docker Compose
+
+Build and start both services:
+
+```bash
+docker compose build
+docker compose up
+```
+
+- Backend API: http://localhost:8000
+- Frontend app: http://localhost:3000
+
+## Run locally (no Docker)
+
+Open two terminals.
+
+### Backend
+```bash
+cd backend
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+
+pip install -r requirements.txt
+uvicorn main:app --host 127.0.0.1 --port 8000
+```
+
+### Frontend
+```bash
+cd frontend
+npm install
+npm start
+```
+
+- Frontend dev server runs at http://localhost:3000
+- Ensure the backend is running for API calls
+
 # Preqin Technical Interview
 
 Hello! If you are reading this, then we're in the process of chatting with you about a technical role at Preqin. Congratulations! To move forward, we'd like to know a bit about how you work. We'd like you to demonstrate your skills and abilities. 
