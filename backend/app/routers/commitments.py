@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from typing import List
+from typing import List, Optional
 
 from ..db import get_db
 from ..schemas import Commitment
@@ -8,8 +8,8 @@ router = APIRouter()
 
 
 @router.get("/commitments", response_model=List[Commitment])
-def list_commitments(conn = Depends(get_db)):
-    sql = (
+def list_commitments(investor_id: Optional[int] = None, conn = Depends(get_db)):
+    base_sql = (
         """
         SELECT c.id,
                c.investor_id,
@@ -19,10 +19,17 @@ def list_commitments(conn = Depends(get_db)):
                c.currency
         FROM commitments c
         JOIN investors i ON i.id = c.investor_id
-        ORDER BY i.name ASC, c.id ASC
         """
     )
-    rows = conn.execute(sql).fetchall()
+
+    params: tuple = ()
+    if investor_id is not None:
+        base_sql += " WHERE c.investor_id = ?"
+        params = (investor_id,)
+
+    base_sql += " ORDER BY i.name ASC, c.id ASC"
+
+    rows = conn.execute(base_sql, params).fetchall()
     return [
         Commitment(
             id=row["id"],

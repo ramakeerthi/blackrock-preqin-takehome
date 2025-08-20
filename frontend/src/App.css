@@ -33,6 +33,14 @@
   font-size: 0.95rem;
   line-height: 1;
   transition: color 0.2s ease;
+  text-decoration: none;
+}
+
+.tab:link,
+.tab:visited,
+.tab:hover,
+.tab:active {
+  text-decoration: none;
 }
 
 .tab:hover {
