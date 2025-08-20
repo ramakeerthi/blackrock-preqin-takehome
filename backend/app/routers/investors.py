@@ -21,7 +21,7 @@ def list_investors(conn = Depends(get_db)):
         FROM investors i
         LEFT JOIN commitments c ON c.investor_id = i.id
         GROUP BY i.id, i.name, i.investor_type, i.country, i.date_added, i.last_updated
-        ORDER BY i.name ASC
+        ORDER BY i.id ASC
         """
     )
     rows = conn.execute(sql).fetchall()

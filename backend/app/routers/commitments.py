@@ -8,7 +8,11 @@ router = APIRouter()
 
 
 @router.get("/commitments", response_model=List[Commitment])
-def list_commitments(investor_id: Optional[int] = None, conn = Depends(get_db)):
+def list_commitments(
+    asset_class: Optional[str] = None,
+    investor_name: Optional[str] = None,
+    conn = Depends(get_db),
+):
     base_sql = (
         """
         SELECT c.id,
@@ -22,14 +26,23 @@ def list_commitments(investor_id: Optional[int] = None, conn = Depends(get_db)):
         """
     )
 
-    params: tuple = ()
-    if investor_id is not None:
-        base_sql += " WHERE c.investor_id = ?"
-        params = (investor_id,)
+    clauses = []
+    params: list = []
+
+    if asset_class:
+        clauses.append("c.asset_class = ?")
+        params.append(asset_class)
+
+    if investor_name:
+        clauses.append("i.name LIKE ?")
+        params.append(f"%{investor_name}%")
+
+    if clauses:
+        base_sql += " WHERE " + " AND ".join(clauses)
 
     base_sql += " ORDER BY i.name ASC, c.id ASC"
 
-    rows = conn.execute(base_sql, params).fetchall()
+    rows = conn.execute(base_sql, tuple(params)).fetchall()
     return [
         Commitment(
             id=row["id"],
